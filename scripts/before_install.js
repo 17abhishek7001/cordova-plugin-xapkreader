@@ -8,11 +8,7 @@ module.exports = function(context) {
 	console.log('scripts/before_install: fixing gradle');
 
 	fse.readFile(target, 'utf8').then((data) => {
-		// replace deprecated "compile" configurations with "implementation"
-		data = data.replace(/debugCompile (project\(.*)\,.*(\))\n\s*releaseCompile.*/g, 'implementation $1)');
-
-		// replace old Java 1_6 variables with 1_8
-		data = data.replace(/(JavaVersion\.VERSION_1)_6/g, '$1_8');
+		
 
 		// fix "cdvCompileSdkVersion" and "cdvBuildToolsVersion" undefined variables
 		data = data.replace(/\/\/ GENERATED FILE! DO NOT EDIT!/, match => `${match}
